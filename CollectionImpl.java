@@ -39,6 +39,7 @@ public class CollectionImpl extends UnicastRemoteObject implements Collection {
             }
         }
         
+        // TODO: enable to set a different IP from command line?
         String hostName = "localhost:" + port;
         System.out.println("Starting server on port: " + port);
 
