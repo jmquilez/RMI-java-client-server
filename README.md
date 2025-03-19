@@ -16,13 +16,14 @@ This is a simple RMI example in Java. It consists of a client and a server.
    rmiregistry 32001
    ```
 
-3. Start the server, optionally specifying a port:
+3. Start the server:
    ```
-   java CollectionImpl [port]
+   java CollectionImpl <IP> [port]
    ```
-   Example with custom port:
+   Examples:
    ```
-   java CollectionImpl 32005
+   java CollectionImpl 192.168.1.2         # Uses specified IP with default port 32001
+   java CollectionImpl 192.168.1.2 32005   # Uses specified IP and port
    ```
 
 4. Start the client, optionally specifying a port:
@@ -33,6 +34,8 @@ This is a simple RMI example in Java. It consists of a client and a server.
 
 ## Notes
 
-- If no port is specified, the default port 32001 will be used
+- The server requires the IP address of the machine it's running on as a mandatory argument
+- The port number is optional (defaults to 32001)
+- Make sure the java.policy file is in the same directory as the application
 - The client will prompt for the server IP address
 - Enter a valid IP address or leave empty to use localhost

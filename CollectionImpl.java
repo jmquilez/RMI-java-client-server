@@ -26,22 +26,31 @@ public class CollectionImpl extends UnicastRemoteObject implements Collection {
     }
 
     public static void main(String[] args) {
+        // Check if IP address is provided
+        if (args.length == 0) {
+            System.out.println("Error: IP address is required");
+            System.out.println("Usage: java CollectionImpl <IP> [port]");
+            System.exit(1);
+        }
+
         // Set the directory where java.policy is located
         System.setProperty("java.security.policy", "./java.policy");
         
-        // Get port from command line or use default
-        int port = 32001; // Default port
-        if (args.length > 0) {
+        // Get IP and port from command line
+        String ip = args[0];
+        int port = 32001;        // Default port
+        
+        if (args.length > 1) {
             try {
-                port = Integer.parseInt(args[0]);
+                port = Integer.parseInt(args[1]);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid port number, using default: 32001");
             }
         }
         
-        // TODO: enable to set a different IP from command line?
-        String hostName = "localhost:" + port;
-        System.out.println("Starting server on port: " + port);
+        System.setProperty("java.rmi.server.hostname", ip);
+        String hostName = ip + ":" + port;
+        System.out.println("Starting server on " + hostName);
 
         try {
             CollectionImpl obj = new CollectionImpl(10, "Zanos");
